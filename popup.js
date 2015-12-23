@@ -28,35 +28,42 @@ document.getElementById("set").onclick = function() {
             url: "http://ping-me.himanshumishra.in/authenticate/",
             data: "email=" + email + "&password=" + md5pass,
             success: function(data) {
-                        if (data.success == "False") {
-                            alert("Sorry, wrong credentials !");
-                        } else if (data.success == "True") {
-                            alert("Congratualtions ! You are now logged in as " + email + ".");
+                if (data.success == "False") {
+                    alert("Sorry, wrong credentials !");
+                } else if (data.success == "True") {
+                    alert("Congratualtions ! You are now logged in as " + email + ".");
+                }
+                chrome.storage.sync.set({
+                    "email": email,
+                    "md5pass": md5pass
+                }, function() {
+                    if (chrome.runtime.error) {
+                        chrome.extension.getBackgroundPage().console.log("Runtime error.");
+                    }
+                });
+                if (data.success == "False") {
+                    chrome.storage.sync.set({
+                        "authorized": "False"
+                    }, function() {
+                        if (chrome.runtime.error) {
+                            chrome.extension.getBackgroundPage().console.log("Runtime error.");
                         }
-                        chrome.storage.sync.set({ "email" : email}, function() {
-                            if (chrome.runtime.error) {
-                                chrome.extension.getBackgroundPage().console.log("Runtime error.");
-                            }
-                        });
-                        if (data.success == "False") {
-                            chrome.storage.sync.set({"authorized" : "False"}, function() {
-                                if (chrome.runtime.error) {
-                                    chrome.extension.getBackgroundPage().console.log("Runtime error.");
-                                }
-                            });
-                        } else if (data.success == "True") {
-                            chrome.storage.sync.set({"authorized" : "True"}, function() {
-                                if (chrome.runtime.error) {
-                                    chrome.extension.getBackgroundPage().console.log("Runtime error.");
-                                }
-                            });
+                    });
+                } else if (data.success == "True") {
+                    chrome.storage.sync.set({
+                        "authorized": "True"
+                    }, function() {
+                        if (chrome.runtime.error) {
+                            chrome.extension.getBackgroundPage().console.log("Runtime error.");
                         }
-                        window.close();
-                    },
+                    });
+                }
+                window.close();
+            },
 
             error: function(jqXHR, textStatus, errorThrown) {
-                        alert("Error, status = " + textStatus + ", " + "error thrown: " + errorThrown);
-                }
+                alert("Error, status = " + textStatus + ", " + "error thrown: " + errorThrown);
+            }
         });
 
     } catch (e) {
