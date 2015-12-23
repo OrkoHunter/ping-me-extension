@@ -1,55 +1,67 @@
 document.body.onload = function() {
-  chrome.storage.sync.get(["email", "password"], function(items) {
-    if (!chrome.runtime.error) {
-      document.getElementById("set_email").innerHTML = items.email;
-      document.getElementById("set_password").innerHTML = items.password;
+
+    try {
+        chrome.storage.sync.get(["email", "authorized"], function(items) {
+            if (!chrome.runtime.error) {
+                document.getElementById("set_email").innerHTML = items.email;
+                document.getElementById("set_authorization").innerHTML = items.authorized;
+            }
+        });
+    } catch (e) {
+        chrome.extension.getBackgroundPage().console.log(e);
     }
-  });
+
 }
 
 document.getElementById("set").onclick = function() {
 
-    chrome.extension.getBackgroundPage().console.log("clicked!")
-
+    document.getElementById("waiting").innerHTML = "Please wait...";
     var email = document.getElementById("email").value;
     var pass = document.getElementById("pass").value;
-
-    //chrome.extension.getBackgroundPage().console.log("email=" + email);
-    //chrome.extension.getBackgroundPage().console.log("pass=" + pass);
-
-    chrome.extension.getBackgroundPage().console.log("outside")
+    var md5pass = CryptoJS.MD5(pass);
+    chrome.extension.getBackgroundPage().console.log("outside");
     try {
-      chrome.extension.getBackgroundPage().console.log("inside try block")
-      /*
-      jQuery.post("http://ping-me.himanshumishra.in/ping/", "email=himanshu&password=dsd", function(data) {
-        var s = data.success;
-        chrome.extension.getBackgroundPage().alert("data.success");
-        var r = data.reason;
-        chrome.extension.getBackgroundPage().console.log("r and s = " + data.success + " " + data.reason + " " + data);
+        chrome.extension.getBackgroundPage().console.log("inside try block");
+
+        jQuery.ajax({
+            type: "POST",
+            url: "http://ping-me.himanshumishra.in/authenticate/",
+            data: "email=" + email + "&password=" + md5pass,
+            success: function(data) {
+                        if (data.success == "False") {
+                            alert("Sorry, wrong credentials !");
+                        } else if (data.success == "True") {
+                            alert("Congratualtions ! You are now logged in as " + email + ".");
+                        }
+                        chrome.storage.sync.set({ "email" : email}, function() {
+                            if (chrome.runtime.error) {
+                                chrome.extension.getBackgroundPage().console.log("Runtime error.");
+                            }
+                        });
+                        if (data.success == "False") {
+                            chrome.storage.sync.set({"authorized" : "False"}, function() {
+                                if (chrome.runtime.error) {
+                                    chrome.extension.getBackgroundPage().console.log("Runtime error.");
+                                }
+                            });
+                        } else if (data.success == "True") {
+                            chrome.storage.sync.set({"authorized" : "True"}, function() {
+                                if (chrome.runtime.error) {
+                                    chrome.extension.getBackgroundPage().console.log("Runtime error.");
+                                }
+                            });
+                        }
+                        window.close();
+                    },
+
+            error: function(jqXHR, textStatus, errorThrown) {
+                        alert("Error, status = " + textStatus + ", " + "error thrown: " + errorThrown);
+                }
         });
-      */
-      jQuery.ajax({
-        type: "POST",
-        url: "http://ping-me.himanshumishra.in/ping/",
-        data: "email=himanshu&password=dsd",
-        success: function(data) {alert("success"); var b = data.success; alert(b);},
-        error:   function(jqXHR, textStatus, errorThrown) {
-          alert("Error, status = " + textStatus + ", " +
-            "error thrown: " + errorThrown
-      );
-      }});
 
-
-      alert("Done");
     } catch (e) {
-      chrome.extension.getBackgroundPage().console.log("Exception caught")
-      chrome.extension.getBackgroundPage().console.log(e)
+        chrome.extension.getBackgroundPage().console.log("Exception caught");
+        chrome.extension.getBackgroundPage().console.log(e);
     }
 
-    chrome.storage.sync.set({ "email" : email , "password" : pass }, function() {
-      if (chrome.runtime.error) {
-        chrome.extension.getBackgroundPage().console.log("Runtime error.");
-      }
-    });
-    window.close();
-  }
+}

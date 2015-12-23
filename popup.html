@@ -3,23 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <script src="jquery-2.1.4.min.js"></script>
+  <script src="md5.js"></script>
 </head>
 <body>
   <label><b>Email :</b></label>
   <br>
   <label id="set_email"></label>
   <br>
-  <label><b>Password :</b></label>
+  <label><b>Verified :</b></label>
   <br>
-  <label id="set_password"></label>
-  <br>
+  <label id="set_authorization"></label>
+  <hr>
   <label><b>Authorization :</b></label>
   <label id="authorization"></label>
-  <hr>
+  <br>
   <input type="email" placeholder="abc@example.com" id="email"></input>
   <label for="password">Password</label>
   <input type="password" placeholder="password" id="pass"></input>
   <button id="set">Set</button>
+  <label id="waiting"><b></b></label>
   <script src="popup.js"></script>
 </body>
 </html>
