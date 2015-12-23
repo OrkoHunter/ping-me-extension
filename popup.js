@@ -18,7 +18,7 @@ document.getElementById("set").onclick = function() {
     document.getElementById("waiting").innerHTML = "Please wait...";
     var email = document.getElementById("email").value;
     var pass = document.getElementById("pass").value;
-    var md5pass = CryptoJS.MD5(pass);
+    var md5pass = CryptoJS.MD5(pass).toString();
     chrome.extension.getBackgroundPage().console.log("outside");
     try {
         chrome.extension.getBackgroundPage().console.log("inside try block");
