@@ -1,3 +1,28 @@
+function notifyMe(message) {
+    try
+      {if (!Notification) {
+              alert('Desktop notifications not available in your browser. Try Chromium.');
+              return;
+            }
+
+            if (Notification.permission !== "granted")
+              Notification.requestPermission();
+            else {
+              var notification = new Notification('ping-me', {
+                icon: 'icon.png',
+                body: message,
+              });
+
+              notification.onclick = function () {
+                // do nothing
+              };
+
+            }}
+        catch (e) {console.log(e);}
+
+}
+
+
 document.body.onload = function() {
 
     try {
@@ -29,9 +54,9 @@ document.getElementById("set").onclick = function() {
             data: "email=" + email + "&password=" + md5pass,
             success: function(data) {
                 if (data.success == "False") {
-                    alert("Sorry, wrong credentials !");
+                    notifyMe("Sorry, wrong credentials !");
                 } else if (data.success == "True") {
-                    alert("Congratualtions ! You are now logged in as " + email + ".");
+                    notifyMe("Congratualtions ! You are now logged in as " + email + ".");
                 }
                 chrome.storage.sync.set({
                     "email": email,
