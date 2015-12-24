@@ -12,47 +12,64 @@
 <body>
 
 
-    <div class="center-align">
+    <div class="center-align" style="width:300px">
+
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card" style="height:265px">
+
+                    <div class="card-content" style="height:270px">
+
+                        <div class="z-depth-2">
+
+                            <div class="card-panel teal lighten-2" style="height:150px">
+
+                                <label style="color:white; font-size:12px"><b>Email :</b></label>
+                                <br>
+                                <label style="color:white" id="set_email"></label>
+                                <br>
+                                <br>
+                                <br>
+                                <label style="color:white; font-size:12px"><b>Verified :</b></label>
+                                <br>
+                                <label style="color:white" id="set_authorization"></label>
+
+                            </div>
+                        </div>
+
+                        <button class="activator white-text text-darken-1 btn waves-effect waves-light">Change</button>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+                        <div class="section">
+
+                            <label><b>Authorization :</b></label>
+                            <div class="input-field col s12">
+                                <label for="email" data-error="wrong" data-success="right">Email</label>
+                                <input type="email" id="email" class="validate"></input>
+                            </div>
+                            <div class="input-field col s12">
+                                <label for="password">Password</label>
+                                <input type="password" id="pass"></input>
+                            </div>
+
+                            <br>
+                            <button class="btn waves-effect waves-light" id="set">Submit </button>
+                            <label id="waiting"><b></b></label>
 
 
-        <div class="container">
+                        </div>
 
-            <div class="z-depth-2">
-
-
-                <div class="card-panel teal lighten-2">
-
-                    <label style="color:white"><b>Email :</b></label>
-                    <br>
-                    <label style="color:white" id="set_email"></label>
-                    <br>
-                    <br>
-                    <label style="color:white"><b>Verified :</b></label>
-                    <br>
-                    <label style="color:white" id="set_authorization"></label>
-
+                    </div>
                 </div>
             </div>
         </div>
 
+
+
+
         <div class="divider"></div>
 
-        <div class="section">
-
-            <label><b>Authorization :</b></label>
-            <div class="input-field col s12">
-                <label for="email" data-error="wrong" data-success="right">Email</label>
-                <input type="email" id="email" class="validate"></input>
-            </div>
-            <div class="input-field col s12">
-                <label for="password">Password</label>
-                <input type="password" id="pass"></input>
-            </div>
-
-        </div>
-
-        <button class="btn waves-effect waves-light" id="set">Submit </button>
-        <label id="waiting"><b></b></label>
 
         <footer class="teal lighten-2 page-footer">
             <div class="container">

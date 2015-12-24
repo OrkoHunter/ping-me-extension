@@ -5,6 +5,8 @@ document.body.onload = function() {
             if (!chrome.runtime.error) {
                 document.getElementById("set_email").innerHTML = items.email;
                 document.getElementById("set_authorization").innerHTML = items.authorized;
+                document.getElementById("set_email1").innerHTML = items.email;
+                document.getElementById("set_authorization1").innerHTML = items.authorized;
             }
         });
     } catch (e) {
