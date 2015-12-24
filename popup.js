@@ -19,9 +19,7 @@ document.getElementById("set").onclick = function() {
     var email = document.getElementById("email").value;
     var pass = document.getElementById("pass").value;
     var md5pass = CryptoJS.MD5(pass).toString();
-    chrome.extension.getBackgroundPage().console.log("outside");
     try {
-        chrome.extension.getBackgroundPage().console.log("inside try block");
 
         jQuery.ajax({
             type: "POST",
