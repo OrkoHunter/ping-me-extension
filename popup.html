@@ -1,27 +1,85 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="utf-8" />
-  <script src="jquery-2.1.4.min.js"></script>
-  <script src="md5.js"></script>
+    <meta charset="utf-8" />
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="md5.js"></script>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 </head>
+
 <body>
-  <label><b>Email :</b></label>
-  <br>
-  <label id="set_email"></label>
-  <br>
-  <label><b>Verified :</b></label>
-  <br>
-  <label id="set_authorization"></label>
-  <hr>
-  <label><b>Authorization :</b></label>
-  <label id="authorization"></label>
-  <br>
-  <input type="email" placeholder="abc@example.com" id="email"></input>
-  <label for="password">Password</label>
-  <input type="password" placeholder="password" id="pass"></input>
-  <button id="set">Set</button>
-  <label id="waiting"><b></b></label>
-  <script src="popup.js"></script>
+
+
+    <div class="center-align">
+
+
+        <div class="container">
+
+            <div class="z-depth-2">
+
+
+                <div class="card-panel teal lighten-2">
+
+                    <label style="color:white"><b>Email :</b></label>
+                    <br>
+                    <label style="color:white" id="set_email"></label>
+                    <br>
+                    <br>
+                    <label style="color:white"><b>Verified :</b></label>
+                    <br>
+                    <label style="color:white" id="set_authorization"></label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+
+            <label><b>Authorization :</b></label>
+            <div class="input-field col s12">
+                <label for="email" data-error="wrong" data-success="right">Email</label>
+                <input type="email" id="email" class="validate"></input>
+            </div>
+            <div class="input-field col s12">
+                <label for="password">Password</label>
+                <input type="password" id="pass"></input>
+            </div>
+
+        </div>
+
+        <button class="btn waves-effect waves-light" id="set">Submit </button>
+        <label id="waiting"><b></b></label>
+
+        <footer class="teal lighten-2 page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Ping Me</h5>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <a class="grey-text text-lighten-3" href="https://github.com/orkohunter/ping-me" target="_blank">Github</a>
+                        <a class="grey-text text-lighten-3">•</a>
+                        <a class="grey-text text-lighten-3" href="http://www.ping-me.in" target="_blank">Website</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2015 <a class="grey-text text-lighten-3" href="https://github.com/orkohunter" target="_blank">Himanshu Mishra</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+
+    <script src="popup.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
+
 </html>
