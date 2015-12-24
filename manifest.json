@@ -3,24 +3,16 @@
   "name" : "ping-me",
   "description" : "ping-me browser extension to recieve pings",
   "version" : "0.1",
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": ["jquery-2.1.4.min.js", "content.js"]
-    }
-  ],
+  "author" : "Himanshu Mishra",
+  "homepage_url" : "https://github.com/orkohunter/ping-me",
   "icons" : {
     "128" : "icon.png"
   },
   "permissions": [
     "storage",
-    "http://ping-me.himanshumishra.in/*",
-    "http://ping-me.himanshumishra.in/*/*",
-    "http://ping-me.himanshumishra.in/*/",
     "http://*/*",
     "webRequest",
+    "notifications",
     "background"
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",

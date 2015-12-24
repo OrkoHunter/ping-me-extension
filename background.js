@@ -10,11 +10,11 @@ setInterval(function() {
                 data: "key=" + md5pass.toString() + "&cipher=" + message.toString(),
                 success: function(response2) {
                     if (response2.success == "True") {
-                        alert(response2.cipher);
+                        notifyMe(response2.cipher);
                     }
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("some error" + textStatus + "  " + errorThrown);
+                    notifyMe("some error" + textStatus + "  " + errorThrown);
                 }
             });
         };
@@ -41,3 +41,27 @@ setInterval(function() {
     }
 
     , 60000);
+
+function notifyMe(message) {
+    try
+      {if (!Notification) {
+              alert('Desktop notifications not available in your browser. Try Chromium.');
+              return;
+            }
+
+            if (Notification.permission !== "granted")
+              Notification.requestPermission();
+            else {
+              var notification = new Notification('ping-me', {
+                icon: 'icon.png',
+                body: message,
+              });
+
+              notification.onclick = function () {
+                // do nothing
+              };
+
+            }}
+        catch (e) {console.log(e);}
+
+}
