@@ -10,7 +10,7 @@ setInterval(function() {
                 data: "key=" + md5pass.toString() + "&cipher=" + message.toString(),
                 success: function(response2) {
                     console.log(response2);
-                    if (response2.r == "True") {
+                    if (response2.success == "True") {
                         alert(response2.cipher);
                     }
                 },
@@ -31,7 +31,7 @@ setInterval(function() {
                 url: "http://ping-me.himanshumishra.in/ping/",
                 data: "email=" + email + "&password=" + password,
                 success: function(response) {
-                    if (response.r == "True") {
+                    if (response.success == "True") {
                         console.log(password);
                         console.log(response.message);
                         decryptAndAlert(password, response.message);
